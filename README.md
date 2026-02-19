@@ -75,3 +75,19 @@ The app runs on `http://localhost:3000` and proxies API requests to port 5000.
 | POST   | /api/todos        | Create a todo       |
 | PATCH  | /api/todos/:id    | Update a todo       |
 | DELETE | /api/todos/:id    | Delete a todo       |
+
+## Deploying to Vercel (free)
+
+Both the React frontend and Express backend deploy as a single Vercel project.
+The backend is served as a serverless function at `/api/*`.
+
+### Steps
+
+1. Push this repo to GitHub.
+2. Go to [vercel.com](https://vercel.com) → **New Project** → import the repo.
+3. Leave the **Root Directory** as `.` (the repo root) — `vercel.json` handles everything.
+4. Add the following **Environment Variable** in the Vercel dashboard:
+   - `MONGODB_URI` — your MongoDB Atlas connection string
+5. Click **Deploy**.
+
+Vercel auto-deploys on every push to `main`.

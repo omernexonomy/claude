@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from './api';
 import AddTodo from './components/AddTodo';
 import TodoList from './components/TodoList';
 import './App.css';
@@ -11,7 +11,7 @@ function App() {
 
   const fetchTodos = async () => {
     try {
-      const res = await axios.get('/api/todos');
+      const res = await api.get('/api/todos');
       setTodos(res.data);
       setError(null);
     } catch (err) {
@@ -27,7 +27,7 @@ function App() {
 
   const addTodo = async (text) => {
     try {
-      const res = await axios.post('/api/todos', { text });
+      const res = await api.post('/api/todos', { text });
       setTodos([res.data, ...todos]);
     } catch (err) {
       setError('Failed to add todo.');
@@ -36,7 +36,7 @@ function App() {
 
   const toggleTodo = async (id, completed) => {
     try {
-      const res = await axios.patch(`/api/todos/${id}`, { completed });
+      const res = await api.patch(`/api/todos/${id}`, { completed });
       setTodos(todos.map((t) => (t._id === id ? res.data : t)));
     } catch (err) {
       setError('Failed to update todo.');
@@ -45,7 +45,7 @@ function App() {
 
   const deleteTodo = async (id) => {
     try {
-      await axios.delete(`/api/todos/${id}`);
+      await api.delete(`/api/todos/${id}`);
       setTodos(todos.filter((t) => t._id !== id));
     } catch (err) {
       setError('Failed to delete todo.');
@@ -54,7 +54,7 @@ function App() {
 
   const editTodo = async (id, text) => {
     try {
-      const res = await axios.patch(`/api/todos/${id}`, { text });
+      const res = await api.patch(`/api/todos/${id}`, { text });
       setTodos(todos.map((t) => (t._id === id ? res.data : t)));
     } catch (err) {
       setError('Failed to edit todo.');
