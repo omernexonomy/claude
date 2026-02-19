@@ -3,6 +3,7 @@ services:
   - type: web
     name: mern-todo-api
     runtime: node
+    plan: free
     rootDir: backend
     buildCommand: npm install
     startCommand: node server.js
@@ -16,6 +17,7 @@ services:
   - type: web
     runtime: static
     name: mern-todo-frontend
+    plan: free
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: build
